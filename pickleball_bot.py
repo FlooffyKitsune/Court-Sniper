@@ -28,7 +28,7 @@ def check_reservation():
         time.sleep(2)  # Wait for the page to load
 
         # Specific date for testing
-        test_date_str = 'Tuesday, February 11, 2025 8:00 AM'
+        test_date_str = 'Wednesday, February 12, 2025 8:00 AM'
 
         # Find all div elements with the specific date
         div_elements = driver.find_elements(By.XPATH, f'//div[contains(@name, "PerformanceDiv") and .//span[@name="prfdatespan" and contains(text(), "{test_date_str}")]]')
