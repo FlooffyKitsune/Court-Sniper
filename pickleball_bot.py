@@ -74,7 +74,44 @@ def check_reservation():
         add_to_cart_button.click()
         time.sleep(2)  # Wait for the page to load
 
+        # Fill out the required fields
+        logging.info('Filling out the required fields...')
+        driver.find_element(By.ID, 'patron_firstname1').send_keys('Jarrett')
+        driver.find_element(By.ID, 'patron_lastname1').send_keys('Dominic')
+        driver.find_element(By.ID, 'patron_zip').send_keys('96814')
+        driver.find_element(By.ID, 'patron_phone').send_keys('8084792653')
+        driver.find_element(By.ID, 'patron_email').send_keys('jarrettdominic@gmail.com')
+        driver.find_element(By.ID, 'patron_custom6').send_keys('CAC')
+
+        # Select "NO" for hotel reservation
+        logging.info('Selecting "NO" for hotel reservation...')
+        reservation_button = driver.find_element(By.XPATH, '//button[@data-id="patron_custom4"]')
+        reservation_button.click()
+        no_option = driver.find_element(By.XPATH, '//span[contains(text(), "NO")]')
+        no_option.click()
+
+        # Select "Website" for how you heard about us
+        logging.info('Selecting "Website" for how you heard about us...')
+        hear_about_us_button = driver.find_element(By.XPATH, '//button[@data-id="patron_custom1"]')
+        hear_about_us_button.click()
+        website_option = driver.find_element(By.XPATH, '//span[contains(text(), "Website")]')
+        website_option.click()
+
+        # Select "None" for vegans
+        logging.info('Selecting "None" for vegans...')
+        vegans_radio = driver.find_element(By.XPATH, '//input[@name="selpatron_custom7" and @value="None"]')
+        vegans_radio.click()
+
+        # Select "None" for gluten free
+        logging.info('Selecting "None" for gluten free...')
+        gluten_free_radio = driver.find_element(By.XPATH, '//input[@name="selpatron_custom9" and @value="None"]')
+        gluten_free_radio.click()
+
+        # Pause for debugging and testing
+        input("Press Enter to continue after verifying the entered information...")
+
         # Submit the reservation
+        '''
         logging.info('Waiting for the submit button to be present...')
         submit_button = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH, '//*[@name="prfbuytixpan"]'))
@@ -83,6 +120,7 @@ def check_reservation():
         submit_button.click()
         logging.info(f'Reservation made at {datetime.now()}')
         return True
+        '''
 
     except Exception as e:
         logging.error(f'Error checking reservation: {e}')
